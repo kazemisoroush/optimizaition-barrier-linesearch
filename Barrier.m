@@ -11,20 +11,14 @@ function [ finalX ] = Barrier( f, x_1, mu, nu, epsilon )
     
     while (true)
         phi = f + mu(k) * bx;
-        %disp(phi);
         
         x{k + 1} = Linesearch( phi, x{k} );
-        %disp(x{k + 1});
-        
+
         mu(k + 1) = nu * mu(k);
-        
-        %disp(norm(minus(x{k + 1}, x{k}), 2));
-        %disp(norm(minus(subs(f, [x1, x2, x3], x{k + 1}), subs(f, [x1, x2, x3], x{k})), 2));
-        
-        if norm(minus(x{k + 1}, x{k}), 2) > epsilon || norm(minus(subs(f, [x1, x2, x3], x{k + 1}), subs(f, [x1, x2, x3], x{k})), 2) > epsilon
+
+        if norm(minus(x{k + 1}, x{k}), 2) < epsilon && abs(subs(f, [x1, x2, x3], x{k + 1}) - subs(f, [x1, x2, x3], x{k})) < epsilon
             break;
         end
-        %disp('soroush');
         
         k = k + 1;
     end
@@ -44,4 +38,3 @@ function [ b ] = BarrierFunction( g )
     
     b = ret;
 end
-

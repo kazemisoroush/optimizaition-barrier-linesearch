@@ -3,11 +3,13 @@
 clear; % Clear variables.
 clc; % Clear command-line.
 
+disp('algorithm started!');
+
 x_1 = [5; 2; 4]; % x0
 
 mu(1) = 1; % mu0
 nu = 0.5;
-epsilon = 0.01;
+epsilon = 0.15;
 
 syms x1 x2 x3;
 
